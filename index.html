@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGH CYBERCAFE | Tech Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --gold: #f1c40f; --dark: #121212; --card: #1e1e1e; --success: #2ecc71; }
+        body { font-family: sans-serif; background: var(--dark); color: white; margin: 0; padding-bottom: 80px; text-align: center; }
+        header { background: #000; padding: 40px; border-bottom: 4px solid var(--gold); }
+        h1 { color: var(--gold); margin: 0; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .product-card { background: var(--card); border-radius: 15px; padding: 20px; border: 1px solid #333; }
+        .price { font-size: 1.5rem; color: var(--success); font-weight: bold; }
+        .btn-order { display: block; background: #25D366; color: white; padding: 12px; text-decoration: none; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+        .admin-controls { display: none; margin-bottom: 20px; }
+        .admin-mode .admin-controls { display: block; }
+        .add-btn { background: var(--gold); border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .admin-btn { position: fixed; bottom: 20px; right: 20px; background: var(--gold); border: none; padding: 12px 25px; border-radius: 30px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header><h1>NGH CYBERCAFE</h1><p>Naharlagun, Arunachal Pradesh</p></header>
+    <div class="container">
+        <div class="admin-controls"><button class="add-btn" onclick="addProduct()">+ Add Product</button></div>
+        <div class="grid" id="productGrid">
+            <div class="product-card">
+                <div style="font-size: 3rem;">📱</div>
+                <h3 contenteditable="false">New Smartphone</h3>
+                <div class="price" contenteditable="false">₹ 000/-</div>
+                <a href="https://wa.me/917642035220" class="btn-order">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+    <button class="admin-btn" onclick="toggleAdmin()" id="lockBtn">Admin Login</button>
+    <script>
+        let isAdmin = false;
+        function toggleAdmin() {
+            if (!isAdmin) {
+                if (prompt("Password:") === "1234") {
+                    isAdmin = true;
+                    document.body.classList.add("admin-mode");
+                    document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "true");
+                    document.getElementById("lockBtn").innerText = "Lock";
+                }
+            } else {
+                isAdmin = false;
+                document.body.classList.remove("admin-mode");
+                document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "false");
+                document.getElementById("lockBtn").innerText = "Admin Login";
+            }
+        }
+        function addProduct() {
+            const grid = document.getElementById('productGrid');
+            const clone = grid.firstElementChild.cloneNode(true);
+            grid.appendChild(clone);
+        }
+    </script>
+</body>
+</html>
