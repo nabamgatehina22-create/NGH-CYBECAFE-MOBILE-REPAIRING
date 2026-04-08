@@ -148,3 +148,112 @@
     </style>
 </head>
 <body>
+
+<header>
+    <h1>NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
+    <p>Mobile Shop & Repair Center</p>
+    <div class="social-links">
+        <a href="https://youtube.com/@NGH-CYBERCAFE" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/yourhandle" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/yourhandle" target="_blank" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="policy-banner">
+        <strong>⚠️ IMPORTANT DISCLAIMER:</strong><br>
+        Bill and Aadhar Card are MANDATORY for all Software/Flashing work.
+    </div>
+
+    <div class="admin-controls">
+        <button style="background:var(--gold); color:black; border:none; padding:10px 20px; border-radius:5px; font-weight:bold; cursor:pointer;" onclick="addNewProduct()">+ Add New Stock Item</button>
+    </div>
+
+    <div class="grid" id="productGrid">
+        <div class="product-card">
+            <button class="delete-btn" onclick="this.parentElement.remove()">DELETE</button>
+            <div class="p-img-container" onclick="triggerUpload(this)">
+                <i class="fas fa-tools"></i>
+                <img src=""><input type="file" onchange="previewImage(this)">
+            </div>
+            <div class="p-info">
+                <div class="p-title" contenteditable="false">Repairing Service</div>
+                <div class="price-tag" contenteditable="false">Starting ₹ 199/-</div>
+                
+                <div class="specs">
+                    <div class="specs-row"><span class="spec-label">Brand:</span> <span contenteditable="false">All Models</span></div>
+                    <div class="specs-row"><span class="spec-label">Qty:</span> <span contenteditable="false">-</span></div>
+                    <div class="specs-row"><span class="spec-label">Specs:</span> <span contenteditable="false">Hardware/Software</span></div>
+                </div>
+
+                <a href="https://wa.me/917642035220" class="btn-order"><i class="fab fa-whatsapp"></i> Order Now</a>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <button class="delete-btn" onclick="this.parentElement.remove()">DELETE</button>
+            <div class="p-img-container" onclick="triggerUpload(this)">
+                <i class="fas fa-headphones"></i>
+                <img src=""><input type="file" onchange="previewImage(this)">
+            </div>
+            <div class="p-info">
+                <div class="p-title" contenteditable="false">Premium Headphones</div>
+                <div class="price-tag" contenteditable="false">Starting ₹ 299/-</div>
+                
+                <div class="specs">
+                    <div class="specs-row"><span class="spec-label">Brand:</span> <span contenteditable="false">Boat, JBL etc.</span></div>
+                    <div class="specs-row"><span class="spec-label">Qty:</span> <span contenteditable="false">5 Units</span></div>
+                    <div class="specs-row"><span class="spec-label">Specs:</span> <span contenteditable="false">High Bass</span></div>
+                </div>
+
+                <a href="https://wa.me/917642035220" class="btn-order"><i class="fab fa-whatsapp"></i> Buy Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="admin-btn" onclick="toggleAdmin()" id="lockBtn">Admin Login</button>
+
+<script>
+    let isAdmin = false;
+    function toggleAdmin() {
+        if (!isAdmin) {
+            if (prompt("Password:") === "1234") {
+                isAdmin = true;
+                document.body.classList.add("admin-mode");
+                document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "true");
+                document.getElementById("lockBtn").innerText = "Lock & View";
+            }
+        } else {
+            isAdmin = false;
+            document.body.classList.remove("admin-mode");
+            document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "false");
+            document.getElementById("lockBtn").innerText = "Admin Login";
+        }
+    }
+
+    function addNewProduct() {
+        const grid = document.getElementById('productGrid');
+        const newCard = grid.children[0].cloneNode(true);
+        // Clear new card data
+        newCard.querySelector('i').className = "fas fa-box-open";
+        newCard.querySelector('img').style.display = "none";
+        newCard.querySelector('img').src = "";
+        grid.appendChild(newCard);
+    }
+
+    function triggerUpload(el) { if(isAdmin) el.querySelector('input').click(); }
+    function previewImage(input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const container = input.parentElement;
+            const img = container.querySelector('img');
+            img.src = e.target.result;
+            img.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+</body>
+</html>
