@@ -7,28 +7,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --gold: #f1c40f; --dark-bg: #121212; --light-bg: #fffde7; --card: #1e1e1e; }
-        body { font-family: sans-serif; background-color: var(--light-bg); margin: 0; padding-bottom: 50px; }
+        body { font-family: sans-serif; background-color: var(--light-bg); margin: 0; padding-bottom: 80px; }
         
         header { background: #000; color: var(--gold); padding: 25px; text-align: center; border-bottom: 4px solid var(--gold); }
         .social-links a { color: var(--gold); margin: 0 10px; font-size: 1.5rem; text-decoration: none; }
         
-        .container { max-width: 1000px; margin: auto; padding: 15px; }
+        .container { max-width: 1100px; margin: auto; padding: 15px; }
 
-        /* Naya Disclaimer */
         .disclaimer { 
             background: #c0392b; color: #fff; padding: 15px; border-radius: 8px; 
             text-align: center; margin-bottom: 20px; border: 2px solid var(--gold); font-size: 0.9rem;
         }
 
+        /* Admin Button Styling */
+        .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
+        .admin-mode .admin-controls { display: block; }
+        .add-btn { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; }
+        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); }
         
-        .img-area { height: 150px; background: #252525; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-        .img-area i { font-size: 3rem; color: var(--gold); }
-        .img-area img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .img-area { height: 140px; background: #252525; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .img-area i { font-size: 3rem; color: var(--gold); opacity: 0.7; }
+        .img-area img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; display: none; }
 
         .info { padding: 15px; }
-        .title { color: var(--gold); font-weight: bold; font-size: 1.2rem; text-align: center; }
+        .title { color: var(--gold); font-weight: bold; font-size: 1.1rem; text-align: center; text-transform: uppercase; }
         .price { color: #2ecc71; text-align: center; margin: 8px 0; font-weight: bold; }
         
         .specs-box { background: #000; padding: 10px; border-radius: 5px; font-size: 0.8rem; border-left: 3px solid var(--gold); margin-bottom: 10px; }
@@ -38,17 +43,16 @@
         
         .contact-us { background: #fff; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 2px solid var(--gold); }
         
-        /* Admin */
-        .admin-btn { position: fixed; bottom: 20px; right: 20px; background: #000; color: var(--gold); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; font-weight: bold; }
-        .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px; cursor: pointer; display: none; }
+        .admin-btn-float { position: fixed; bottom: 20px; right: 20px; background: #000; color: var(--gold); padding: 12px 20px; border-radius: 30px; border: 1px solid var(--gold); cursor: pointer; font-weight: bold; z-index: 1000; }
+        .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; }
         .admin-mode .delete-btn { display: block; }
-        .admin-mode [contenteditable="true"] { background: #333; border: 1px dashed var(--gold); }
+        .admin-mode [contenteditable="true"] { background: #333; border: 1px dashed var(--gold); padding: 2px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 1.5rem;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
+    <h1 style="margin:0;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
     <div class="social-links" style="margin-top:10px;">
         <a href="#"><i class="fab fa-youtube"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -58,57 +62,94 @@
 
 <div class="container">
     <div class="disclaimer">
-        <strong>⚠️ IMPORTANT:</strong><br>
+        <strong>⚠️ IMPORTANT DISCLAIMER:</strong><br>
         Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking.<br>
         Data may be at risk/lost and is accepted by the mobile owner.
     </div>
 
-    <div class="grid" id="mainGrid">
-        <div class="card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="img-area" onclick="triggerImg(this)">
-                <i class="fas fa-tools"></i><img src=""><input type="file" style="display:none" onchange="showImg(this)">
-            </div>
-            <div class="info">
-                <div class="title" contenteditable="false">LCD Display / Folder</div>
-                <div class="price" contenteditable="false">Best Price</div>
-                <div class="specs-box">
-                    <div class="row"><span>Brand:</span> <span contenteditable="false">All Models</span></div>
-                    <div class="row"><span>Quality:</span> <span contenteditable="false">OG/Copy</span></div>
-                    <div class="row"><span>Qty:</span> <span contenteditable="false">In Stock</span></div>
-                </div>
-                <a href="https://wa.me/917642035220" class="wa-btn">WhatsApp Us</a>
-            </div>
-        </div>
+    <div class="admin-controls">
+        <button class="add-btn" onclick="addNewItem()">+ Add New Product</button>
+    </div>
+
+    <div class="grid" id="productGrid">
+        <script>
+            const items = [
+                {name: "Tempered Glass", icon: "fa-shield-alt", price: "₹ 99/-"},
+                {name: "LCD Display / Folder", icon: "fa-mobile-alt", price: "Best Price"},
+                {name: "Fast Charger", icon: "fa-bolt", price: "₹ 199/-"},
+                {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "₹ 499/-"},
+                {name: "Ear Buds", icon: "fa-headphones-alt", price: "₹ 799/-"},
+                {name: "Ear Pods", icon: "fa-headphones", price: "₹ 899/-"},
+                {name: "Wired Earphone", icon: "fa-headphones", price: "₹ 99/-"},
+                {name: "USB Cable", icon: "fa-plug", price: "₹ 49/-"},
+                {name: "Data Cable", icon: "fa-link", price: "₹ 79/-"},
+                {name: "OTG Adapter", icon: "fa-usb", price: "₹ 30/-"},
+                {name: "Mobile Battery", icon: "fa-battery-full", price: "Starting ₹ 250/-"},
+                {name: "Neck Band", icon: "fa-blender-phone", price: "₹ 399/-"}
+            ];
+
+            const grid = document.getElementById('productGrid');
+            items.forEach(item => {
+                grid.innerHTML += `
+                <div class="card">
+                    <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+                    <div class="img-area" onclick="triggerImg(this)">
+                        <i class="fas ${item.icon}"></i><img src=""><input type="file" style="display:none" onchange="showImg(this)">
+                    </div>
+                    <div class="info">
+                        <div class="title" contenteditable="false">${item.name}</div>
+                        <div class="price" contenteditable="false">${item.price}</div>
+                        <div class="specs-box">
+                            <div class="row"><span>Brand:</span> <span contenteditable="false">-</span></div>
+                            <div class="row"><span>Qty:</span> <span contenteditable="false">In Stock</span></div>
+                        </div>
+                        <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
+                    </div>
+                </div>`;
+            });
+        </script>
     </div>
 
     <div class="contact-us">
-        <h3>📍 Contact Info</h3>
+        <h3>📍 Shop Details</h3>
         <p>Call: +91 7642035220 | Email: nghcybercafe@gmail.com</p>
         <p>Naharlagun, Arunachal Pradesh</p>
     </div>
 </div>
 
-<button class="admin-btn" onclick="goAdmin()" id="btnAd">Admin Login</button>
+<button class="admin-btn-float" onclick="toggleAdmin()" id="btnLock">Admin Login</button>
 
 <script>
-    let mode = false;
-    function goAdmin() {
-        if (!mode) {
+    let isAdmin = false;
+    function toggleAdmin() {
+        if (!isAdmin) {
             if (prompt("Password:") === "1234") {
-                mode = true;
+                isAdmin = true;
                 document.body.classList.add("admin-mode");
                 document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
-                document.getElementById("btnAd").innerText = "Lock View";
+                document.getElementById("btnLock").innerText = "Lock & View";
             }
         } else {
-            mode = false;
+            isAdmin = false;
             document.body.classList.remove("admin-mode");
             document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "false");
-            document.getElementById("btnAd").innerText = "Admin Login";
+            document.getElementById("btnLock").innerText = "Admin Login";
         }
     }
-    function triggerImg(div) { if(mode) div.querySelector('input').click(); }
+
+    function addNewItem() {
+        const grid = document.getElementById('productGrid');
+        const firstCard = grid.querySelector('.card').cloneNode(true);
+        firstCard.querySelector('.title').innerText = "New Product";
+        firstCard.querySelector('i').className = "fas fa-box-open";
+        firstCard.querySelector('img').style.display = "none";
+        grid.prepend(firstCard);
+        if(isAdmin) {
+            firstCard.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+        }
+    }
+
+    function triggerImg(div) { if(isAdmin) div.querySelector('input').click(); }
     function showImg(input) {
         const reader = new FileReader();
         reader.onload = (e) => {
