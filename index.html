@@ -9,18 +9,15 @@
         :root { --main-bg: #e3f2fd; --header-bg: #fbc02d; --card-bg: #ffffff; --text: #333; --accent: #1976d2; --danger: #e74c3c; }
         body { font-family: 'Poppins', sans-serif; background: var(--main-bg); color: var(--text); margin: 0; padding-bottom: 50px; }
         
-        /* Header */
         header { background: var(--header-bg); padding: 30px; text-align: center; border-bottom: 5px solid #f9a825; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { color: #000; text-transform: uppercase; margin: 0; font-size: 1.8rem; font-weight: 900; }
+        h1 { color: #000; text-transform: uppercase; margin: 0; font-size: 1.6rem; font-weight: 900; }
         .social-links { margin-top: 15px; }
         .social-links a { color: #000; font-size: 1.5rem; margin: 0 12px; text-decoration: none; }
 
         .container { max-width: 1100px; margin: auto; padding: 20px; }
         
-        /* Product Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .product-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); position: relative; transition: 0.3s; display: flex; flex-direction: column; border: 1px solid #ddd; }
-        .product-card:hover { transform: translateY(-5px); }
         
         .delete-btn { position: absolute; top: 10px; right: 10px; background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; font-weight: bold; }
         .admin-mode .delete-btn { display: block; }
@@ -29,14 +26,38 @@
         .p-img-container i { font-size: 3.5rem; color: var(--accent); }
         .p-img-container img { position: absolute; width: 100%; height: 100%; object-fit: cover; display: none; }
         
-        .p-info { padding: 20px; flex-grow: 1; text-align: center; }
-        .p-title { font-weight: bold; color: #000; font-size: 1.3rem; }
-        .price-tag { color: #2e7d32; font-weight: bold; font-size: 1.2rem; margin: 10px 0; }
+        .p-info { padding: 20px; flex-grow: 1; }
+        .p-title { font-weight: bold; color: #000; font-size: 1.2rem; margin-bottom: 5px; text-align: center; }
+        .price-tag { color: #2e7d32; font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; text-align: center; }
         
-        .specs { background: #f9f9f9; padding: 10px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 15px; border: 1px solid #eee; text-align: left; }
-        .specs-row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 5px 0; }
-        
+        /* Specifications Box Wapas Aa Gaya */
+        .specs { background: #f1f8ff; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 15px; border: 1px solid #d1e9ff; }
+        .specs-row { display: flex; justify-content: space-between; border-bottom: 1px solid #e1f0ff; padding: 4px 0; }
+        .specs-row:last-child { border: none; }
+        .spec-label { color: #666; font-weight: bold; }
+
         .btn-order { display: block; background: #25D366; color: white; text-align: center; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* Contact Us Section */
-        .contact-section { background: #fff; margin-top: 50px; padding: 30px; border
+        .contact-section { background: #fff; margin-top: 50px; padding: 30px; border-radius: 15px; text-align: center; border: 2px solid var(--header-bg); }
+
+        .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
+        .admin-mode .admin-controls { display: block; }
+        .admin-mode [contenteditable="true"] { border: 2px dashed #fbc02d; background: #fffde7; padding: 2px; }
+        .admin-btn { position: fixed; bottom: 20px; right: 20px; background: #000; color: #fff; padding: 12px 20px; border-radius: 30px; border: none; font-weight: bold; cursor: pointer; z-index: 1000; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>NGH CYBER CAFE & MOBILE REPAIRING HUB</h1>
+    <div class="social-links">
+        <a href="https://youtube.com/@NGH-CYBERCAFE" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="admin-controls">
+        <button style="background:#000; color:#fff; padding:10px 20px; border:none; border-radius:5px; font-weight:bold;
