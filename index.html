@@ -6,63 +6,118 @@
     <title>NGH CYBERCAFE & MOBILE REPAIRING HUB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { 
-            --main-bg: #fffde7; 
-            --header-bg: #000; 
-            --card-bg: #1e1e1e; 
-            --gold: #f1c40f; 
-            --text-light: #ffffff; 
-            --success: #2ecc71; 
-            --danger: #e74c3c; 
-        }
-        body { font-family: 'Poppins', sans-serif; background: var(--main-bg); color: #000; margin: 0; padding-bottom: 100px; line-height: 1.6; }
+        :root { --gold: #f1c40f; --dark-bg: #121212; --light-bg: #fffde7; --card: #1e1e1e; }
+        body { font-family: sans-serif; background-color: var(--light-bg); margin: 0; padding-bottom: 50px; }
         
-        /* Header Section */
-        header { background: var(--header-bg); padding: 30px; text-align: center; border-bottom: 4px solid var(--gold); }
-        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-size: 1.5rem; }
-        .social-links { margin-top: 15px; }
-        .social-links a { color: var(--gold); font-size: 1.4rem; margin: 0 12px; text-decoration: none; }
+        header { background: #000; color: var(--gold); padding: 25px; text-align: center; border-bottom: 4px solid var(--gold); }
+        .social-links a { color: var(--gold); margin: 0 10px; font-size: 1.5rem; text-decoration: none; }
+        
+        .container { max-width: 1000px; margin: auto; padding: 15px; }
 
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-
-        /* Naya Disclaimer Design */
-        .policy-banner { 
-            background: #c0392b; 
-            color: white; 
-            padding: 15px; 
-            border-radius: 10px; 
-            margin-bottom: 25px; 
-            text-align: center; 
-            border: 2px solid var(--gold); 
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        /* Naya Disclaimer */
+        .disclaimer { 
+            background: #c0392b; color: #fff; padding: 15px; border-radius: 8px; 
+            text-align: center; margin-bottom: 20px; border: 2px solid var(--gold); font-size: 0.9rem;
         }
 
-        /* Product Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; position: relative; color: var(--text-light); }
-        .product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; }
         
-        .delete-btn { position: absolute; top: 10px; right: 10px; background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; }
+        .img-area { height: 150px; background: #252525; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .img-area i { font-size: 3rem; color: var(--gold); }
+        .img-area img { width: 100%; height: 100%; object-fit: cover; display: none; }
+
+        .info { padding: 15px; }
+        .title { color: var(--gold); font-weight: bold; font-size: 1.2rem; text-align: center; }
+        .price { color: #2ecc71; text-align: center; margin: 8px 0; font-weight: bold; }
+        
+        .specs-box { background: #000; padding: 10px; border-radius: 5px; font-size: 0.8rem; border-left: 3px solid var(--gold); margin-bottom: 10px; }
+        .row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #222; }
+        
+        .wa-btn { background: #25D366; color: #fff; text-align: center; display: block; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        
+        .contact-us { background: #fff; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 2px solid var(--gold); }
+        
+        /* Admin */
+        .admin-btn { position: fixed; bottom: 20px; right: 20px; background: #000; color: var(--gold); padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; font-weight: bold; }
+        .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px; cursor: pointer; display: none; }
         .admin-mode .delete-btn { display: block; }
+        .admin-mode [contenteditable="true"] { background: #333; border: 1px dashed var(--gold); }
+    </style>
+</head>
+<body>
 
-        .p-img-container { width: 100%; height: 150px; background: #252525; display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
-        .p-img-container i { font-size: 3.5rem; color: var(--gold); opacity: 0.7; }
-        .p-img-container img { position: absolute; width: 100%; height: 100%; object-fit: cover; display: none; }
-        
-        .p-info { padding: 15px; flex-grow: 1; }
-        .p-title { font-weight: bold; color: var(--gold); font-size: 1.1rem; text-align: center; margin-bottom: 5px; }
-        .price-tag { color: var(--success); font-weight: bold; text-align: center; margin-bottom: 10px; }
-        
-        .specs { background: #151515; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 15px; border-left: 3px solid var(--gold); }
-        .specs-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 3px 0; }
-        
-        .btn-order { display: block; background: #25D366; color: white; text-align: center; padding: 10px; text-decoration: none; border-radius: 8px; font-weight: bold; }
+<header>
+    <h1 style="margin:0; font-size: 1.5rem;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
+    <div class="social-links" style="margin-top:10px;">
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+    </div>
+</header>
 
-        /* Contact Section */
-        .contact-box { background: #fff; margin-top: 50px; padding: 25px; border-radius: 15px; text-align: center; border: 2px solid var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+<div class="container">
+    <div class="disclaimer">
+        <strong>⚠️ IMPORTANT:</strong><br>
+        Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking.<br>
+        Data may be at risk/lost and is accepted by the mobile owner.
+    </div>
 
-        /* Admin Setup */
-        .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
-        .admin-mode .admin-controls { display: block; }
-        .admin-mode [contenteditable="true"] { border: 1px dashed var(--gold); background
+    <div class="grid" id="mainGrid">
+        <div class="card">
+            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+            <div class="img-area" onclick="triggerImg(this)">
+                <i class="fas fa-tools"></i><img src=""><input type="file" style="display:none" onchange="showImg(this)">
+            </div>
+            <div class="info">
+                <div class="title" contenteditable="false">LCD Display / Folder</div>
+                <div class="price" contenteditable="false">Best Price</div>
+                <div class="specs-box">
+                    <div class="row"><span>Brand:</span> <span contenteditable="false">All Models</span></div>
+                    <div class="row"><span>Quality:</span> <span contenteditable="false">OG/Copy</span></div>
+                    <div class="row"><span>Qty:</span> <span contenteditable="false">In Stock</span></div>
+                </div>
+                <a href="https://wa.me/917642035220" class="wa-btn">WhatsApp Us</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-us">
+        <h3>📍 Contact Info</h3>
+        <p>Call: +91 7642035220 | Email: nghcybercafe@gmail.com</p>
+        <p>Naharlagun, Arunachal Pradesh</p>
+    </div>
+</div>
+
+<button class="admin-btn" onclick="goAdmin()" id="btnAd">Admin Login</button>
+
+<script>
+    let mode = false;
+    function goAdmin() {
+        if (!mode) {
+            if (prompt("Password:") === "1234") {
+                mode = true;
+                document.body.classList.add("admin-mode");
+                document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+                document.getElementById("btnAd").innerText = "Lock View";
+            }
+        } else {
+            mode = false;
+            document.body.classList.remove("admin-mode");
+            document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "false");
+            document.getElementById("btnAd").innerText = "Admin Login";
+        }
+    }
+    function triggerImg(div) { if(mode) div.querySelector('input').click(); }
+    function showImg(input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = input.parentElement.querySelector('img');
+            img.src = e.target.result;
+            img.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+</body>
+</html>
