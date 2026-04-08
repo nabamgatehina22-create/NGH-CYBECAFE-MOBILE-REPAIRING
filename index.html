@@ -6,204 +6,63 @@
     <title>NGH CYBERCAFE & MOBILE REPAIRING HUB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --main-bg: #fffde7; --header-bg: #000; --card-bg: #1e1e1e; --gold: #f1c40f; --text-light: #ffffff; --success: #2ecc71; --danger: #e74c3c; }
+        :root { 
+            --main-bg: #fffde7; 
+            --header-bg: #000; 
+            --card-bg: #1e1e1e; 
+            --gold: #f1c40f; 
+            --text-light: #ffffff; 
+            --success: #2ecc71; 
+            --danger: #e74c3c; 
+        }
         body { font-family: 'Poppins', sans-serif; background: var(--main-bg); color: #000; margin: 0; padding-bottom: 100px; line-height: 1.6; }
+        
+        /* Header Section */
         header { background: var(--header-bg); padding: 30px; text-align: center; border-bottom: 4px solid var(--gold); }
-        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-size: 1.6rem; }
+        h1 { color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin: 0; font-size: 1.5rem; }
         .social-links { margin-top: 15px; }
         .social-links a { color: var(--gold); font-size: 1.4rem; margin: 0 12px; text-decoration: none; }
+
         .container { max-width: 1200px; margin: auto; padding: 20px; }
-        .policy-banner { background: #c0392b; color: white; padding: 12px; border-radius: 8px; margin-bottom: 25px; text-align: center; border: 1px solid var(--gold); font-size: 0.85rem; }
+
+        /* Naya Disclaimer Design */
+        .policy-banner { 
+            background: #c0392b; 
+            color: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin-bottom: 25px; 
+            text-align: center; 
+            border: 2px solid var(--gold); 
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Product Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .product-card { background: var(--card-bg); border-radius: 15px; overflow: hidden; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; position: relative; color: var(--text-light); }
         .product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        
         .delete-btn { position: absolute; top: 10px; right: 10px; background: var(--danger); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; }
         .admin-mode .delete-btn { display: block; }
+
         .p-img-container { width: 100%; height: 150px; background: #252525; display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
         .p-img-container i { font-size: 3.5rem; color: var(--gold); opacity: 0.7; }
         .p-img-container img { position: absolute; width: 100%; height: 100%; object-fit: cover; display: none; }
+        
         .p-info { padding: 15px; flex-grow: 1; }
-        .p-title { font-weight: bold; color: var(--gold); font-size: 1.1rem; text-align: center; }
-        .price-tag { color: var(--success); font-weight: bold; text-align: center; margin: 5px 0; }
+        .p-title { font-weight: bold; color: var(--gold); font-size: 1.1rem; text-align: center; margin-bottom: 5px; }
+        .price-tag { color: var(--success); font-weight: bold; text-align: center; margin-bottom: 10px; }
+        
         .specs { background: #151515; padding: 10px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 15px; border-left: 3px solid var(--gold); }
         .specs-row { display: flex; justify-content: space-between; border-bottom: 1px solid #222; padding: 3px 0; }
-        .btn-order { display: block; background: #25D366; color: white; text-align: center; padding: 10px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 0.9rem; }
+        
+        .btn-order { display: block; background: #25D366; color: white; text-align: center; padding: 10px; text-decoration: none; border-radius: 8px; font-weight: bold; }
+
+        /* Contact Section */
+        .contact-box { background: #fff; margin-top: 50px; padding: 25px; border-radius: 15px; text-align: center; border: 2px solid var(--gold); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+        /* Admin Setup */
         .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
         .admin-mode .admin-controls { display: block; }
-        .admin-mode [contenteditable="true"] { border: 1px dashed var(--gold); background: #2a2a2a; }
-        .admin-btn { position: fixed; bottom: 20px; right: 20px; background: #000; color: var(--gold); padding: 12px 20px; border-radius: 30px; border: 2px solid var(--gold); font-weight: bold; cursor: pointer; z-index: 1000; }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
-    <div class="social-links">
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-    </div>
-</header>
-
-<div class="container">
-    <div class="policy-banner"><strong>⚠️ DISCLAIMER:</strong> Bill & Aadhar Card Mandatory for Software Work.</div>
-    <div class="admin-controls"><button style="background:var(--gold); padding:10px 20px; border:none; border-radius:5px; font-weight:bold; cursor:pointer;" onclick="addNewProduct()">+ Add Custom Item</button></div>
-
-    <div class="grid" id="productGrid">
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-shield-alt"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Tempered Glass</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 99/-</div>
-                <div class="specs"><div class="specs-row"><span>Type:</span> <span contenteditable="false">11D / OG / UV</span></div><div class="specs-row"><span>Qty:</span> <span contenteditable="false">In Stock</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Order Now</a>
-            </div>
-        </div><div class="policy-banner">
-    <strong>⚠️ IMPORTANT DISCLAIMER:</strong><br>
-    Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking. 
-    Data loss risk is involved; the device owner accepts full responsibility.
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-mobile-alt"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">LCD Display / Folder</div>
-                <div class="price-tag" contenteditable="false">Best Price</div>
-                <div class="specs"><div class="specs-row"><span>Quality:</span> <span contenteditable="false">Original / Copy</span></div><div class="specs-row"><span>Repair:</span> <span contenteditable="false">Same Day</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Enquire Now</a>
-            </div>
-        </div>
-</div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-bolt"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Fast Charger</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 199/-</div>
-                <div class="specs"><div class="specs-row"><span>Output:</span> <span contenteditable="false">18W / 33W / 65W</span></div><div class="specs-row"><span>Brand:</span> <span contenteditable="false">All Brands</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Buy Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-volume-up"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Bluetooth Speakers</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 499/-</div>
-                <div class="specs"><div class="specs-row"><span>Battery:</span> <span contenteditable="false">Long Lasting</span></div><div class="specs-row"><span>Type:</span> <span contenteditable="false">Portable</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Buy Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-headphones-alt"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Wireless Earbuds/Pods</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 799/-</div>
-                <div class="specs"><div class="specs-row"><span>Version:</span> <span contenteditable="false">TWS Bluetooth</span></div><div class="specs-row"><span>Case:</span> <span contenteditable="false">Charging Case</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Order Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-headphones"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Wired Earphones</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 99/-</div>
-                <div class="specs"><div class="specs-row"><span>Jack:</span> <span contenteditable="false">3.5mm / Type-C</span></div><div class="specs-row"><span>Bass:</span> <span contenteditable="false">Deep Bass</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Buy Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-plug"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Data Cable</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 49/-</div>
-                <div class="specs"><div class="specs-row"><span>Type:</span> <span contenteditable="false">C-Type / Micro / iPhone</span></div><div class="specs-row"><span>Speed:</span> <span contenteditable="false">Fast Sync</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Order Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-usb"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">OTG Adapter</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 30/-</div>
-                <div class="specs"><div class="specs-row"><span>Use:</span> <span contenteditable="false">Connect PenDrive</span></div><div class="specs-row"><span>Type:</span> <span contenteditable="false">Type-C / Micro</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Buy Now</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-battery-full"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Mobile Battery</div>
-                <div class="price-tag" contenteditable="false">Best Quality</div>
-                <div class="specs"><div class="specs-row"><span>Brand:</span> <span contenteditable="false">All Models</span></div><div class="specs-row"><span>Warranty:</span> <span contenteditable="false">6 Months</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Enquire</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-            <div class="p-img-container" onclick="triggerUpload(this)"><i class="fas fa-blender-phone"></i><img src=""><input type="file" onchange="previewImage(this)"></div>
-            <div class="p-info">
-                <div class="p-title" contenteditable="false">Neckband Bluetooth</div>
-                <div class="price-tag" contenteditable="false">Starting ₹ 399/-</div>
-                <div class="specs"><div class="specs-row"><span>Battery:</span> <span contenteditable="false">24 Hours+</span></div><div class="specs-row"><span>Brand:</span> <span contenteditable="false">Realme, Boat etc.</span></div></div>
-                <a href="https://wa.me/917642035220" class="btn-order">Order Now</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<button class="admin-btn" onclick="toggleAdmin()" id="lockBtn">Admin Login</button>
-
-<script>
-    let isAdmin = false;
-    function toggleAdmin() {
-        if (!isAdmin) {
-            if (prompt("Password:") === "1234") {
-                isAdmin = true;
-                document.body.classList.add("admin-mode");
-                document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "true");
-                document.getElementById("lockBtn").innerText = "Lock & View";
-            }
-        } else {
-            isAdmin = false;
-            document.body.classList.remove("admin-mode");
-            document.querySelectorAll('[contenteditable]').forEach(el => el.contentEditable = "false");
-            document.getElementById("lockBtn").innerText = "Admin Login";
-        }
-    }
-    function addNewProduct() {
-        const grid = document.getElementById('productGrid');
-        const newCard = grid.children[0].cloneNode(true);
-        newCard.querySelector('i').className = "fas fa-box-open";
-        newCard.querySelector('img').style.display = "none";
-        grid.appendChild(newCard);
-    }
-    function triggerUpload(el) { if(isAdmin) el.querySelector('input').click(); }
-    function previewImage(input) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const container = input.parentElement;
-            const img = container.querySelector('img');
-            img.src = e.target.result;
-            img.style.display = 'block';
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-</script>
-</body>
-</html>
+        .admin-mode [contenteditable="true"] { border: 1px dashed var(--gold); background
