@@ -88,4 +88,104 @@
                 <input type="file" id="galleryFile" style="display:none" onchange="uploadToGallery(this)">
             </div>
 
-            <div class="gallery-grid" id="public
+            <div class="gallery-grid" id="publicGallery">
+                <div class="gallery-card"><img src="https://via.placeholder.com/300x200?text=Shop+Photo+1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-section" class="page-section">
+        <h3>📋 Menu & Categories</h3>
+        <p>Categories: Accessories, Audio, Repairing. (Price sorting enabled in Admin mode)</p>
+    </div>
+
+    <div id="contact-section" class="page-section" style="text-align:center;">
+        <h3>📍 Contact Us</h3>
+        <p><i class="fas fa-phone-alt"></i> +91 7642035220</p>
+        <p><i class="fas fa-envelope"></i> nabamgatehina22@gmail.com</p>
+    </div>
+
+</div>
+
+<script>
+    const items = [
+        {name: "Tempered Glass", icon: "fa-shield-alt", price: "₹ 99"},
+        {name: "Mobile Cover", icon: "fa-phone-square", price: "₹ 149"}
+    ];
+
+    function loadProducts() {
+        const grid = document.getElementById('productGrid');
+        items.forEach(item => {
+            grid.innerHTML += createCardHTML(item.name, item.price, item.icon);
+        });
+    }
+
+    function createCardHTML(name, price, icon) {
+        return `<div class="card">
+                <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+                <div class="img-area" onclick="triggerImg(this)"><i class="fas ${icon}"></i><img src=""><input type="file" style="display:none" onchange="showImg(this)"></div>
+                <div class="info">
+                    <div class="title" contenteditable="false">${name}</div>
+                    <div class="price" contenteditable="false">${price}</div>
+                    <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
+                </div>
+            </div>`;
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+    }
+
+    let isAdmin = false;
+    function toggleAdmin() {
+        if (!isAdmin) {
+            if(prompt("Password:") === "1234") {
+                isAdmin = true;
+                document.body.classList.add("admin-mode");
+                document.getElementById("navAdminBtn").innerText = "Lock";
+                document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+            }
+        } else {
+            isAdmin = false;
+            document.body.classList.remove("admin-mode");
+            document.getElementById("navAdminBtn").innerText = "Admin Login";
+        }
+    }
+
+    function uploadToGallery(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const gallery = document.getElementById('publicGallery');
+                const div = document.createElement('div');
+                div.className = 'gallery-card';
+                div.innerHTML = `<button class="delete-btn" onclick="this.parentElement.remove()">X</button><img src="${e.target.result}">`;
+                gallery.prepend(div);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function addNewProductCard() {
+        const grid = document.getElementById('productGrid');
+        grid.insertAdjacentHTML('afterbegin', createCardHTML("New Item", "₹ 0", "fa-box"));
+        if(isAdmin) document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+    }
+
+    function triggerImg(div) { if(isAdmin) div.querySelector('input').click(); }
+    function showImg(input) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = input.parentElement.querySelector('img');
+            img.src = e.target.result;
+            img.style.display = 'block';
+            input.parentElement.querySelector('i').style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    window.onload = loadProducts;
+</script>
+</body>
+</html>
