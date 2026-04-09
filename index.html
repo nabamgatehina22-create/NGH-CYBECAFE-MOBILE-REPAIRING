@@ -11,186 +11,200 @@
         
         header { background: #000; color: var(--gold); padding: 20px 10px; text-align: center; border-bottom: 2px solid var(--gold); }
         
-        /* NEW TOP MENU BAR (As per your sketch) */
-        .nav-ribbon { 
-            background: #000; 
-            border-bottom: 4px solid var(--gold);
-            display: grid;
-            grid-template-columns: repeat(6, 1fr); /* 6 Columns for your 6 menu items */
-            text-align: center;
-        }
-        .nav-ribbon a { 
-            color: #fff; 
-            text-decoration: none; 
-            padding: 15px 5px; 
-            font-size: 0.8rem; 
-            font-weight: bold; 
-            text-transform: uppercase;
-            border-right: 1px solid #333;
-            transition: 0.3s;
-        }
-        .nav-ribbon a:last-child { border-right: none; }
+        /* NAVIGATION RIBBON */
+        .nav-ribbon { background: #000; border-bottom: 4px solid var(--gold); display: grid; grid-template-columns: repeat(6, 1fr); text-align: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-ribbon a { color: #fff; text-decoration: none; padding: 15px 5px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; border-right: 1px solid #333; cursor: pointer; }
         .nav-ribbon a:hover { background: var(--gold); color: #000; }
 
-        .social-links a { color: var(--gold); margin: 0 10px; font-size: 1.2rem; text-decoration: none; }
-        
         .container { max-width: 1100px; margin: auto; padding: 15px; }
 
-        .disclaimer { 
-            background: #c0392b; color: #fff; padding: 15px; border-radius: 8px; 
-            text-align: center; margin: 20px 0; border: 2px solid var(--gold); font-size: 0.9rem;
-        }
+        /* SECTIONS HIDDEN BY DEFAULT */
+        .page-section { display: none; background: #fff; padding: 20px; border-radius: 12px; border: 2px solid var(--gold); margin-top: 20px; }
+        .active-section { display: block; }
 
-        .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
-        .admin-mode .admin-controls { display: block; }
-        .add-btn { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; }
+        /* PRODUCT GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); }
         
-        .img-area { height: 140px; background: #252525; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
+        .img-area { height: 140px; background: #252525; display: flex; align-items: center; justify-content: center; position: relative; cursor: pointer; }
         .img-area i { font-size: 3rem; color: var(--gold); opacity: 0.7; }
         .img-area img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; display: none; }
 
-        .info { padding: 15px; }
-        .title { color: var(--gold); font-weight: bold; font-size: 1.1rem; text-align: center; text-transform: uppercase; }
-        .price { color: #2ecc71; text-align: center; margin: 8px 0; font-weight: bold; }
+        .info { padding: 15px; text-align: center; }
+        .title { color: var(--gold); font-weight: bold; text-transform: uppercase; font-size: 1.1rem; }
+        .price { color: #2ecc71; margin: 8px 0; font-weight: bold; font-size: 1.2rem; }
         
         .specs-box { background: #000; padding: 10px; border-radius: 5px; font-size: 0.8rem; border-left: 3px solid var(--gold); margin-bottom: 10px; }
         .row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid #222; }
-        
+
         .wa-btn { background: #25D366; color: #fff; text-align: center; display: block; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        
-        .contact-us { background: #fff; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 2px solid var(--gold); }
-        
-        .admin-btn-float { position: fixed; bottom: 20px; right: 20px; background: #000; color: var(--gold); padding: 12px 20px; border-radius: 30px; border: 1px solid var(--gold); cursor: pointer; font-weight: bold; z-index: 1000; }
+
+        /* ADMIN SPECIFIC STYLING */
+        .admin-controls { display: none; text-align: center; margin-top: 15px; background: #333; padding: 10px; border-radius: 5px; }
+        .admin-mode .admin-controls { display: block; }
+        .add-btn { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+        .admin-mode [contenteditable="true"] { background: #444; border: 1px dashed var(--gold); padding: 2px; }
         .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; }
         .admin-mode .delete-btn { display: block; }
-        .admin-mode [contenteditable="true"] { background: #333; border: 1px dashed var(--gold); padding: 2px; }
 
-        /* Responsive menu for mobile */
-        @media (max-width: 600px) {
-            .nav-ribbon { grid-template-columns: repeat(3, 1fr); }
-            .nav-ribbon a { border-bottom: 1px solid #333; }
-        }
+        /* CONTACT SECTION */
+        .contact-us { background: #fff; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; border: 2px solid var(--gold); }
+        .contact-info p { font-size: 1.1rem; line-height: 2; margin: 5px 0; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0; font-size: 1.5rem;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
-    <div class="social-links" style="margin-top:10px;">
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-    </div>
+    <h1 style="margin:0;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
 </header>
 
 <nav class="nav-ribbon">
-    <a href="#">Home</a>
-    <a href="#">Menu</a>
-    <a href="#">Gallery</a>
-    <a href="#">Contact Us</a>
-    <a href="#productGrid">Product</a>
-    <a href="javascript:void(0)" onclick="toggleAdmin()">Admin</a>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('menu-section')">Menu</a>
+    <a onclick="showSection('gallery-section')">Gallery</a>
+    <a onclick="showSection('contact-section')">Contact Us</a>
+    <a onclick="showSection('home')">Product</a>
+    <a onclick="toggleAdmin()" id="navAdminBtn">Admin Login</a>
 </nav>
 
 <div class="container">
-    <div class="disclaimer">
-        <strong>⚠️ IMPORTANT DISCLAIMER:</strong><br>
-        Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking.
-    </div>
-
+    
     <div class="admin-controls">
-        <button class="add-btn" onclick="addNewItem()">+ Add New Product</button>
+        <h3 style="color:#fff; margin-top:0;">🔧 Admin Controls</h3>
+        <button class="add-btn" onclick="addNewProductCard()">+ Add New Product Card</button>
+        <p style="color:#aaa; font-size:0.8rem;">Note: Upload photos for cards and edit title/price by clicking on them.</p>
     </div>
 
-    <div class="grid" id="productGrid">
-        <script>
-            const items = [
-                {name: "Mobile Screen Guard", icon: "fa-mobile", price: "Starting ₹ 49/-"},
-                {name: "Tempered Glass", icon: "fa-shield-alt", price: "₹ 99/-"},
-                {name: "Mobile Cover", icon: "fa-phone-square", price: "Starting ₹ 99/-"},
-                {name: "Charger & Adapters", icon: "fa-bolt", price: "₹ 199/-"},
-                {name: "Data Cables", icon: "fa-link", price: "₹ 79/-"},
-                {name: "Power Bank", icon: "fa-battery-half", price: "Best Price"},
-                {name: "Memory Card & Pen Drive", icon: "fa-sd-card", price: "Best Price"},
-                {name: "OTG Adapter", icon: "fa-usb", price: "₹ 30/-"},
-                {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "₹ 499/-"}
-            ];
-
-            const grid = document.getElementById('productGrid');
-            items.forEach(item => {
-                grid.innerHTML += `
-                <div class="card">
-                    <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
-                    <div class="img-area" onclick="triggerImg(this)">
-                        <i class="fas ${item.icon}"></i><img src=""><input type="file" style="display:none" onchange="showImg(this)">
-                    </div>
-                    <div class="info">
-                        <div class="title" contenteditable="false">${item.name}</div>
-                        <div class="price" contenteditable="false">${item.price}</div>
-                        <div class="specs-box">
-                            <div class="row"><span>Status:</span> <span contenteditable="false">In Stock</span></div>
-                            <div class="row"><span>Quality:</span> <span contenteditable="false">Premium</span></div>
-                        </div>
-                        <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
-                    </div>
-                </div>`;
-            });
-        </script>
+    <div id="home" class="page-section active-section">
+        <div style="background: #000; color: var(--gold); padding: 10px; text-align: center; margin-bottom: 10px; border-radius: 5px;">
+            🏠 <strong>Welcome Back!</strong> Return to this Home page to view products.
+        </div>
+        
+        <div class="grid" id="productGrid">
+            </div>
     </div>
 
-    <div class="contact-us">
-        <h3>📍 Shop Details</h3>
-        <p>Call: +91 7642035220 | Email: nghcybercafe@gmail.com</p>
-        <p>Naharlagun, Arunachal Pradesh</p>
+    <div id="menu-section" class="page-section">
+        <h3>📋 Product Categories</h3>
+        <p>This section is for organizing products by category. Sorting and range selection can be customized.</p>
+        <button class="add-btn" style="background:#000; color:var(--gold); border:1px solid var(--gold); padding:5px 15px;" onclick="showSection('home')">↩ Return to Shop</button>
     </div>
+
+    <div id="gallery-section" class="page-section">
+        <h3>🖼️ Gallery</h3>
+        <p>Use Admin Mode to add new photo cards with product images.</p>
+        <button class="add-btn" style="background:#000; color:var(--gold); border:1px solid var(--gold); padding:5px 15px;" onclick="showSection('home')">↩ Return to Home</button>
+    </div>
+
+    <div id="contact-section" class="page-section" style="text-align:center;">
+        <h3>📍 Contact Details</h3>
+        <div class="contact-info">
+            <p><i class="fas fa-phone-alt" style="color:green"></i> <strong>Phone:</strong> +91 7642035220</p>
+            <p><i class="fas fa-envelope" style="color:#c0392b"></i> <strong>Email:</strong> nabamgatehina22@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> Naharlagun, Arunachal Pradesh</p>
+        </div>
+        <button class="add-btn" style="background:#000; color:var(--gold); margin-top:20px; padding:10px 20px;" onclick="showSection('home')">↩ Return to Home</button>
+    </div>
+
 </div>
 
-<button class="admin-btn-float" onclick="toggleAdmin()" id="btnLock">Admin Login</button>
-
 <script>
+    const items = [
+        {name: "Tempered Glass", icon: "fa-shield-alt", price: "Starting ₹ 99"},
+        {name: "Mobile Screen Guard", icon: "fa-mobile", price: "₹ 49/-"},
+        {name: "Mobile Cover", icon: "fa-phone-square", price: "Starting ₹ 99/-"},
+        {name: "Charger & Adapters", icon: "fa-bolt", price: "Starting ₹ 199/-"}
+    ];
+
+    function loadProducts() {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        items.forEach(item => {
+            grid.innerHTML += `
+            <div class="card">
+                <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+                <div class="img-area" onclick="triggerImgUpload(this)"><i class="fas ${item.icon}"></i><img src=""><input type="file" style="display:none" onchange="showProductImg(this)"></div>
+                <div class="info">
+                    <div class="title" contenteditable="false">${item.name}</div>
+                    <div class="price" contenteditable="false">${item.price}</div>
+                    <div class="specs-box">
+                        <div class="row"><span>Status:</span> <span contenteditable="false">In Stock</span></div>
+                        <div class="row"><span>Quality:</span> <span contenteditable="false">Premium</span></div>
+                    </div>
+                    <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
+                </div>
+            </div>`;
+        });
+    }
+
+    function showSection(id) {
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+        document.getElementById(id).classList.add('active-section');
+    }
+
     let isAdmin = false;
     function toggleAdmin() {
         if (!isAdmin) {
-            let pass = prompt("Password:");
-            if (pass === "1234") {
+            let pass = prompt("Enter Admin Password:");
+            if(pass === "1234") {
                 isAdmin = true;
+                alert("Admin Mode Activated! You can now add and delete products.");
                 document.body.classList.add("admin-mode");
+                document.getElementById("navAdminBtn").innerText = "Log Out (Lock)";
                 document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
-                document.getElementById("btnLock").innerText = "Lock & View";
             }
         } else {
             isAdmin = false;
             document.body.classList.remove("admin-mode");
+            document.getElementById("navAdminBtn").innerText = "Admin Login";
             document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "false");
-            document.getElementById("btnLock").innerText = "Admin Login";
         }
     }
 
-    function addNewItem() {
+    // Add New Product Card Function
+    function addNewProductCard() {
         const grid = document.getElementById('productGrid');
-        const firstCard = grid.querySelector('.card').cloneNode(true);
-        firstCard.querySelector('.title').innerText = "New Product";
-        firstCard.querySelector('i').className = "fas fa-box-open";
-        firstCard.querySelector('img').style.display = "none";
-        grid.prepend(firstCard);
-        if(isAdmin) {
-            firstCard.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
+        const newCard = `
+        <div class="card">
+            <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+            <div class="img-area" onclick="triggerImgUpload(this)">
+                <i class="fas fa-box-open" style="color:var(--gold); font-size:3rem; opacity:0.7;"></i>
+                <img src="" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; display:none;">
+                <input type="file" style="display:none" onchange="showProductImg(this)">
+            </div>
+            <div class="info">
+                <div class="title" contenteditable="true">New Product Name</div>
+                <div class="price" contenteditable="true">Price ₹ /-</div>
+                <div class="specs-box">
+                    <div class="row"><span>Status:</span> <span contenteditable="true">In Stock</span></div>
+                    <div class="row"><span>Quality:</span> <span contenteditable="true">Premium</span></div>
+                </div>
+                <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
+            </div>
+        </div>`;
+        grid.prepend(newCard); // Add new product to top of grid
+    }
+
+    // Trigger photo upload ONLY in Admin Mode
+    function triggerImgUpload(div) { if(isAdmin) div.querySelector('input').click(); }
+
+    function showProductImg(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const parentDiv = input.parentElement;
+                const imgElement = parentDiv.querySelector('img');
+                const iconElement = parentDiv.querySelector('i');
+                imgElement.src = e.target.result;
+                imgElement.style.display = 'block';
+                iconElement.style.display = 'none'; // Hide default icon when image is uploaded
+            };
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
-    function triggerImg(div) { if(isAdmin) div.querySelector('input').click(); }
-    function showImg(input) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = input.parentElement.querySelector('img');
-            img.src = e.target.result;
-            img.style.display = 'block';
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+    window.onload = loadProducts;
 </script>
 </body>
 </html>
