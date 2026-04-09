@@ -19,7 +19,6 @@
             text-align: center; margin-bottom: 20px; border: 2px solid var(--gold); font-size: 0.9rem;
         }
 
-        /* Admin Button Styling */
         .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
         .admin-mode .admin-controls { display: block; }
         .add-btn { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
@@ -73,22 +72,20 @@
 
     <div class="grid" id="productGrid">
         <script>
-            // Is hisse ko code mein "const items =" wali jagah par replace kar dein:
-
-const items = [
-    {name: "Tempered Glass", icon: "fa-shield-alt", price: "Contact for Price"},
-    {name: "LCD Display / Folder", icon: "fa-mobile-alt", price: "Contact for Price"},
-    {name: "Fast Charger", icon: "fa-bolt", price: "Contact for Price"},
-    {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "Contact for Price"},
-    {name: "Ear Buds", icon: "fa-headphones-alt", price: "Contact for Price"},
-    {name: "Ear Pods", icon: "fa-headphones", price: "Contact for Price"},
-    {name: "Wired Earphone", icon: "fa-headphones", price: "Contact for Price"},
-    {name: "USB Cable", icon: "fa-plug", price: "Contact for Price"},
-    {name: "Data Cable", icon: "fa-link", price: "Contact for Price"},
-    {name: "OTG Adapter", icon: "fa-usb", price: "Contact for Price"},
-    {name: "Mobile Battery", icon: "fa-battery-full", price: "Contact for Price"},
-    {name: "Neck Band", icon: "fa-blender-phone", price: "Contact for Price"}
-];
+            // Pre-loaded list based on your handwriting photo
+            const items = [
+                {name: "Mobile Screen Guard", icon: "fa-mobile", price: "Starting ₹ 49/-"},
+                {name: "Tempered Glass", icon: "fa-shield-alt", price: "₹ 99/-"},
+                {name: "Mobile Cover", icon: "fa-phone-square", price: "Starting ₹ 99/-"},
+                {name: "Charger & Adapters", icon: "fa-bolt", price: "₹ 199/-"},
+                {name: "Data Cables", icon: "fa-link", price: "₹ 79/-"},
+                {name: "Power Bank", icon: "fa-battery-half", price: "Best Price"},
+                {name: "Memory Card & Pen Drive", icon: "fa-sd-card", price: "Best Price"},
+                {name: "OTG Adapter", icon: "fa-usb", price: "₹ 30/-"},
+                {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "₹ 499/-"},
+                {name: "LCD Display / Folder", icon: "fa-mobile-alt", price: "Best Price"},
+                {name: "Mobile Battery", icon: "fa-battery-full", price: "Starting ₹ 250/-"}
+            ];
 
             const grid = document.getElementById('productGrid');
             items.forEach(item => {
@@ -102,8 +99,8 @@ const items = [
                         <div class="title" contenteditable="false">${item.name}</div>
                         <div class="price" contenteditable="false">${item.price}</div>
                         <div class="specs-box">
-                            <div class="row"><span>Brand:</span> <span contenteditable="false">-</span></div>
-                            <div class="row"><span>Qty:</span> <span contenteditable="false">In Stock</span></div>
+                            <div class="row"><span>Status:</span> <span contenteditable="false">In Stock</span></div>
+                            <div class="row"><span>Quality:</span> <span contenteditable="false">Premium</span></div>
                         </div>
                         <a href="https://wa.me/917642035220" class="wa-btn">Order Now</a>
                     </div>
