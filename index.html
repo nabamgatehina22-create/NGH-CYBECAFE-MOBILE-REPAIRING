@@ -9,14 +9,36 @@
         :root { --gold: #f1c40f; --dark-bg: #121212; --light-bg: #fffde7; --card: #1e1e1e; }
         body { font-family: sans-serif; background-color: var(--light-bg); margin: 0; padding-bottom: 80px; }
         
-        header { background: #000; color: var(--gold); padding: 25px; text-align: center; border-bottom: 4px solid var(--gold); }
-        .social-links a { color: var(--gold); margin: 0 10px; font-size: 1.5rem; text-decoration: none; }
+        header { background: #000; color: var(--gold); padding: 20px 10px; text-align: center; border-bottom: 2px solid var(--gold); }
+        
+        /* NEW TOP MENU BAR (As per your sketch) */
+        .nav-ribbon { 
+            background: #000; 
+            border-bottom: 4px solid var(--gold);
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* 6 Columns for your 6 menu items */
+            text-align: center;
+        }
+        .nav-ribbon a { 
+            color: #fff; 
+            text-decoration: none; 
+            padding: 15px 5px; 
+            font-size: 0.8rem; 
+            font-weight: bold; 
+            text-transform: uppercase;
+            border-right: 1px solid #333;
+            transition: 0.3s;
+        }
+        .nav-ribbon a:last-child { border-right: none; }
+        .nav-ribbon a:hover { background: var(--gold); color: #000; }
+
+        .social-links a { color: var(--gold); margin: 0 10px; font-size: 1.2rem; text-decoration: none; }
         
         .container { max-width: 1100px; margin: auto; padding: 15px; }
 
         .disclaimer { 
             background: #c0392b; color: #fff; padding: 15px; border-radius: 8px; 
-            text-align: center; margin-bottom: 20px; border: 2px solid var(--gold); font-size: 0.9rem;
+            text-align: center; margin: 20px 0; border: 2px solid var(--gold); font-size: 0.9rem;
         }
 
         .admin-controls { display: none; text-align: center; margin-bottom: 20px; }
@@ -24,8 +46,7 @@
         .add-btn { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); }
+        .card { background: var(--card); color: #fff; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #333; }
         
         .img-area { height: 140px; background: #252525; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
         .img-area i { font-size: 3rem; color: var(--gold); opacity: 0.7; }
@@ -46,12 +67,18 @@
         .delete-btn { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; display: none; z-index: 10; }
         .admin-mode .delete-btn { display: block; }
         .admin-mode [contenteditable="true"] { background: #333; border: 1px dashed var(--gold); padding: 2px; }
+
+        /* Responsive menu for mobile */
+        @media (max-width: 600px) {
+            .nav-ribbon { grid-template-columns: repeat(3, 1fr); }
+            .nav-ribbon a { border-bottom: 1px solid #333; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1 style="margin:0;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
+    <h1 style="margin:0; font-size: 1.5rem;">NGH CYBERCAFE & MOBILE REPAIRING HUB</h1>
     <div class="social-links" style="margin-top:10px;">
         <a href="#"><i class="fab fa-youtube"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -59,11 +86,19 @@
     </div>
 </header>
 
+<nav class="nav-ribbon">
+    <a href="#">Home</a>
+    <a href="#">Menu</a>
+    <a href="#">Gallery</a>
+    <a href="#">Contact Us</a>
+    <a href="#productGrid">Product</a>
+    <a href="javascript:void(0)" onclick="toggleAdmin()">Admin</a>
+</nav>
+
 <div class="container">
     <div class="disclaimer">
         <strong>⚠️ IMPORTANT DISCLAIMER:</strong><br>
-        Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking.<br>
-        Data may be at risk/lost and is accepted by the mobile owner.
+        Bill Receipt & Aadhar Card are MANDATORY for Software Work & FRP Unlocking.
     </div>
 
     <div class="admin-controls">
@@ -72,7 +107,6 @@
 
     <div class="grid" id="productGrid">
         <script>
-            // Pre-loaded list based on your handwriting photo
             const items = [
                 {name: "Mobile Screen Guard", icon: "fa-mobile", price: "Starting ₹ 49/-"},
                 {name: "Tempered Glass", icon: "fa-shield-alt", price: "₹ 99/-"},
@@ -82,9 +116,7 @@
                 {name: "Power Bank", icon: "fa-battery-half", price: "Best Price"},
                 {name: "Memory Card & Pen Drive", icon: "fa-sd-card", price: "Best Price"},
                 {name: "OTG Adapter", icon: "fa-usb", price: "₹ 30/-"},
-                {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "₹ 499/-"},
-                {name: "LCD Display / Folder", icon: "fa-mobile-alt", price: "Best Price"},
-                {name: "Mobile Battery", icon: "fa-battery-full", price: "Starting ₹ 250/-"}
+                {name: "Bluetooth Speakers", icon: "fa-volume-up", price: "₹ 499/-"}
             ];
 
             const grid = document.getElementById('productGrid');
@@ -122,7 +154,8 @@
     let isAdmin = false;
     function toggleAdmin() {
         if (!isAdmin) {
-            if (prompt("Password:") === "1234") {
+            let pass = prompt("Password:");
+            if (pass === "1234") {
                 isAdmin = true;
                 document.body.classList.add("admin-mode");
                 document.querySelectorAll('[contenteditable]').forEach(e => e.contentEditable = "true");
